@@ -10,9 +10,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
+import jakarta.persistence.ForeignKey;
 
 @Entity
 @Table(name = "empleados")
@@ -35,13 +37,18 @@ public class Empleado {
 
     @OneToOne
     private Direccion direccion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empresa_fk", foreignKey = @ForeignKey(name = "fk_empleado_empresa"))
+
+    private Empresa empresa;
     
     public Empleado (){
         
     }
     
     public Empleado(String nombre, Integer edad, Boolean casado, Double salario, LocalDate fechaNacimiento,
-            List<String> email, Direccion direccion) {
+            List<String> email, Direccion direccion, Empresa empresa) {
         this.nombre = nombre;
         this.edad = edad;
         this.casado = casado;
@@ -49,6 +56,7 @@ public class Empleado {
         this.fechaNacimiento = fechaNacimiento;
         this.email = email;
         this.direccion = direccion;
+        this.empresa = empresa;
     }
 
     public Long getId() {
@@ -115,11 +123,21 @@ public class Empleado {
         this.direccion = direccion;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
     @Override
     public String toString() {
         return "Empleado [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", casado=" + casado + ", salario="
                 + salario + ", fechaNacimiento=" + fechaNacimiento + ", email=" + email + ", direccion=" + direccion
-                + "]";
+                + ", empresa=" + empresa + "]";
     }
+
+    
     
 }
