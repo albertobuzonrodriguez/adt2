@@ -69,7 +69,7 @@ public class Metodos {
         Empleado.class).list();
         for (Empleado e : listaResultado) {
             System.out.println("Usuario con ID: " + e.getId() + " - nombre: " +e.getNombre() + " - edad: " + e.getEdad() +" - casado: " + e.getCasado() + " - salario: " +
-            e.getSalario() +" años - y fecha de nacimiento: " +e.getFechaNacimiento() +" - email: " + e.getEmail());
+            e.getSalario() +" años - y fecha de nacimiento: " +e.getFechaNacimiento() +" - email: " + e.getEmail() + " direccion: "+e.getDireccion());
         }
         sessionObj.close();
         return listaResultado;

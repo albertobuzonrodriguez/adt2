@@ -25,10 +25,9 @@ public class Direccion {
     public Direccion(){}
 
 
-    public Direccion(String calle, Integer cp, Empleado empleado) {
+    public Direccion(String calle, Integer cp) {
         this.calle = calle;
         this.cp = cp;
-        this.empleado = empleado;
     }
 
     public Long getId() {
@@ -62,6 +61,16 @@ public class Direccion {
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
+
+    @Override
+    public String toString() {
+        return calle + ", " + cp;
+    }
+
+
+
+
+
 
     
 }

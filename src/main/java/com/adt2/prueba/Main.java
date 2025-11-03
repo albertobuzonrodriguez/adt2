@@ -4,11 +4,14 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Empresa esa = new Empresa("CESUR Cartuja 2025", "A12345678L");
-        
-        Empleado e2 = new Empleado("María", 23, true, 2500.85, LocalDate.of(2002, 10, 15), null, null, esa);
-        //Metodos.leerE();
+        // Empresa esa = new Empresa("CESUR Cartuja 2025", "A12345678L");
+        // Metodos.crearESA(esa);
+        // Direccion d1 = new Direccion("Patricio Saenz", 42993);
+        // Metodos.crearD(d1);
+        // Empleado e2 = new Empleado("María", 23, true, 2500.85, LocalDate.of(2002, 10, 15), null, d1, esa);
+        // Metodos.crearE(e2);
+        Metodos.leerE();
         //Metodos.eliminarE(e1);
-        Metodos.eliminarE(e2);
+        // Metodos.eliminarE(e2);
     }
 }
