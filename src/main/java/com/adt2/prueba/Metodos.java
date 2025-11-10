@@ -69,7 +69,7 @@ public class Metodos {
         Empleado.class).list();
         for (Empleado e : listaResultado) {
             System.out.println("Usuario con ID: " + e.getId() + " - nombre: " +e.getNombre() + " - edad: " + e.getEdad() +" - casado: " + e.getCasado() + " - salario: " +
-            e.getSalario() +" años - y fecha de nacimiento: " +e.getFechaNacimiento() +" - email: " + e.getEmail() + " direccion: "+e.getDireccion());
+            e.getSalario() + " años - y fecha de nacimiento: " + e.getFechaNacimiento() + " - email: " + e.getEmail() + " - direccion: " + e.getDireccion() + " - empresa: " + e.getEmpresa());
         }
         sessionObj.close();
         return listaResultado;
@@ -88,6 +88,20 @@ public class Metodos {
         return listaResultado;
     }
 
+    public static List<Empresa> leerEsa(){
+        String consulta = "FROM " + Empresa.class.getName();
+        Session ss = getSession();
+        List<Empresa> listaResultado = ss.createQuery(consulta,
+        Empresa.class).list();
+        for (Empresa esa : listaResultado) {
+            System.out.println(
+                "ID " + esa.getId() + " - nombre: " + esa.getNombre() + " - CIF: " + esa.getCif()
+            );
+        }
+        ss.close();
+        return listaResultado;
+    }
+
     public static Empleado getE(int id) {
         Session session = getSession();
         Empleado e = session.find(Empleado.class, id);
@@ -100,6 +114,13 @@ public class Metodos {
         Direccion d = session.find(Direccion.class, id);
         session.close();
         return d;
+    }
+
+    public static Empresa getEsa(int id){
+        Session ss = getSession();
+        Empresa esa = ss.find(Empresa.class, id);
+        ss.close();
+        return esa;
     }
 
     public static void actualizarE(Empleado e){
@@ -127,7 +148,18 @@ public class Metodos {
         session.merge(d);
         tx.commit();
         session.close();
-        System.out.println("Actualizado correctamente la dirección de id: " + d.getId());
+        System.out.println("Actualizada correctamente la dirección de id: " + d.getId());
+    }
+
+    public static void actualizarEsa(Empresa esa){
+        Session ss = getSession();
+        Transaction tx = ss.beginTransaction();
+        esa.setNombre("Emasesa");
+        esa.setCif("CE298493");
+        ss.merge(esa);
+        tx.commit();
+        ss.close();
+        System.out.println("Actualizada correctamente la empresa de id: " + esa.getId());
     }
 
     public static void eliminarE(Empleado e){
@@ -146,6 +178,15 @@ public class Metodos {
         tx.commit();
         session.close();
         System.out.println("La dirección de id: " + d.getId() + " ha sido eliminada correctamente. ");
+    }
+
+    public static void eliminarEsa(Empresa esa){
+        Session ss = getSession();
+        Transaction tx = ss.beginTransaction();
+        ss.remove(esa);
+        tx.commit();
+        ss.close();
+        System.out.println("La empresa de id: " + esa.getId() + " ha sido eliminada correctamente. ");
     }
 
 
