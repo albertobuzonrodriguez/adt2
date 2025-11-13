@@ -14,7 +14,12 @@ public class Main {
         Metodos.crearESA(esa2);
         Direccion d1 = new Direccion("Patricio Saenz", 42993);
         Metodos.crearD(d1);
-        Empleado e2 = new Empleado("María", 23, true, 2500.85, LocalDate.of(2002, 10, 15), null, d1, esa2);
+        LocalDate fechaProyecto = LocalDate.of(2025, 11, 11);
+        Proyecto p1 = new Proyecto("AiMAI", fechaProyecto);
+        Metodos.crearProyecto(p1);
+        List<Proyecto> proyectos = new ArrayList<Proyecto>();
+        proyectos.add(p1);
+        Empleado e2 = new Empleado("María", 23, true, 2500.85, LocalDate.of(2002, 10, 15), null, d1, esa2, proyectos);
         Metodos.crearE(e2);
         // Metodos.leerE();
         //Metodos.eliminarE(e1);

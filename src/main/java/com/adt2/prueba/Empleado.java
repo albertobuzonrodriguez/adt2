@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -40,15 +42,20 @@ public class Empleado {
 
     @ManyToOne
     @JoinColumn(name = "id_empresa_fk", foreignKey = @ForeignKey(name = "fk_empleado_empresa"))
-
     private Empresa empresa;
     
+    @ManyToMany
+    @JoinTable(name="empleado_proyecto", 
+            joinColumns= @JoinColumn(name= "id_Empleado", referencedColumnName= "idEmpleado"),
+            inverseJoinColumns = @JoinColumn(name = "id_proyecto", referencedColumnName = "idProyecto"))
+            
+    private List<Proyecto> proyectos = new ArrayList<Proyecto>();
     public Empleado (){
         
     }
     
     public Empleado(String nombre, Integer edad, Boolean casado, Double salario, LocalDate fechaNacimiento,
-            List<String> email, Direccion direccion, Empresa empresa) {
+            List<String> email, Direccion direccion, Empresa empresa, List<Proyecto> proyectos) {
         this.nombre = nombre;
         this.edad = edad;
         this.casado = casado;
@@ -57,6 +64,7 @@ public class Empleado {
         this.email = email;
         this.direccion = direccion;
         this.empresa = empresa;
+        this.proyectos = proyectos;
     }
 
     public Long getId() {
@@ -129,6 +137,14 @@ public class Empleado {
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    public List<Proyecto> getProyectos() {
+        return proyectos;
+    }
+
+    public void setProyectos(List<Proyecto> proyectos) {
+        this.proyectos = proyectos;
     }
 
     @Override
